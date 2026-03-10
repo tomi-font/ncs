@@ -285,16 +285,9 @@ config MBEDTLS_MPI_MAX_SIZE
 	default 384 # Needed to support RSA 3072
 	range 256 2048
 
-config MBEDTLS_LEGACY_CRYPTO_C_SILENCE_DEPRECATION
-	bool
-	help
-	  Prompt-less configuration that can be set by subsystems that still are
-	  dependent on legacy Mbed TLS APIs to build and run. Setting this
-	  removes warnings for the deprecated MBEDTLS_LEGACY_CRYPTO_C Kconfig.
-
 config MBEDTLS_LEGACY_CRYPTO_C
 	bool "(Legacy) mbed TLS crypto APIs"
-	select DEPRECATED if !MBEDTLS_LEGACY_CRYPTO_C_SILENCE_DEPRECATION
+	select DEPRECATED
 	help
 	  Enable support for legacy mbed TLS APIs.
 	  Note that this is a configuration that will be removed.
@@ -834,11 +827,11 @@ config MBEDTLS_PK_PARSE_EC_EXTENDED
 
 config MBEDTLS_PEM_PARSE_C
 	bool "Support parsing PEM files"
-	depends on MBEDTLS_BASE64_C
+	select MBEDTLS_BASE64_C
 
 config MBEDTLS_PEM_WRITE_C
 	bool "Support writing PEM files"
-	depends on MBEDTLS_BASE64_C
+	select MBEDTLS_BASE64_C
 
 config MBEDTLS_SSL_CLI_ALLOW_WEAK_CERTIFICATE_VERIFICATION_WITHOUT_HOSTNAME
 	bool

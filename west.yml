@@ -79,6 +79,8 @@ manifest:
         #
         # Please keep this list sorted alphabetically.
         name-allowlist:
+          - tf-psa-crypto
+          - tf-psa-crypto-framework
           - canopennode
           - chre
           - cmsis
@@ -137,7 +139,11 @@ manifest:
     - name: mbedtls
       path: modules/crypto/mbedtls
       repo-path: sdk-mbedtls
-      revision: d77330677bef8221fff58c88fd0cd9ab4fd33cd8
+      revision: a7a93526a51f7c3fbd7db33588439a573991635f
+    - name: mbedtls-framework
+      path: modules/crypto/mbedtls/framework
+      remote: zephyrproject
+      revision: 421f7a29f79e535fc6497b6cb4767cd7023db20b
     - name: oberon-psa-crypto
       path: modules/crypto/oberon-psa-crypto
       repo-path: sdk-oberon-psa-crypto

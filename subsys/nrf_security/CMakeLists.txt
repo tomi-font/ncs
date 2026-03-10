@@ -60,7 +60,6 @@ if(CONFIG_BUILD_WITH_TFM OR CONFIG_PSA_SSF_CRYPTO_CLIENT)
 
   # 2. Enable OBERON_BACKEND, disable CC3XX_BACKEND
   set(CONFIG_NRF_OBERON                         True)
-  set(CONFIG_OBERON_BACKEND                     True)
   set(CONFIG_CC3XX_BACKEND                      False)
   set(CONFIG_CC310_BACKEND                      False)
   set(CONFIG_CC312_BACKEND                      False)

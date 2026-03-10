@@ -18,7 +18,7 @@ append_with_prefix(src_crypto_legacy ${ARM_MBEDTLS_PATH}/library
 
 # Add all files that are neccessary for (nrf_oberon or cracen) + builtin in legacy mode
 # These files are used only as a convenience until PSA Crypto APIs are standarized
-if(CONFIG_MBEDTLS_LEGACY_CRYPTO_C OR CONFIG_OBERON_BACKEND OR CONFIG_CC3XX_BACKEND OR
+if(CONFIG_MBEDTLS_LEGACY_CRYPTO_C OR CONFIG_CC3XX_BACKEND OR
    CONFIG_PSA_CRYPTO_DRIVER_OBERON OR CONFIG_PSA_CRYPTO_DRIVER_CRACEN)
   append_with_prefix(src_crypto_legacy ${ARM_MBEDTLS_PATH}/library
     block_cipher.c
@@ -41,7 +41,7 @@ endif()
 # There is a symbol inside the nrf_oberon ECDSA implementation (built lib) that is
 # colliding with a symbol in ecdsa.c in mbedtls: mbedtls_ecdsa_can_do.
 # To solve this quickly a copy of ecdsa.c is added here in case oberon is built
-if(CONFIG_OBERON_BACKEND OR CONFIG_PSA_CRYPTO_DRIVER_OBERON)
+if(CONFIG_PSA_CRYPTO_DRIVER_OBERON)
   list(APPEND src_crypto_legacy
     ${CMAKE_CURRENT_LIST_DIR}/ecdsa_oberon.c
   )
@@ -82,14 +82,12 @@ if(CONFIG_CC3XX_BACKEND)
 endif()
 
 # Legacy Files needed when Oberon is disabled
-if(NOT CONFIG_OBERON_BACKEND)
-  append_with_prefix(src_crypto_legacy ${ARM_MBEDTLS_PATH}/library
-    chacha20.c
-    poly1305.c
-    ecjpake.c
-    platform.c
-  )
-endif()
+append_with_prefix(src_crypto_legacy ${ARM_MBEDTLS_PATH}/library
+  chacha20.c
+  poly1305.c
+  ecjpake.c
+  platform.c
+)
 
 # Add oberon-specific replacement files
 if(CONFIG_OBERON_ONLY_ENABLED)
