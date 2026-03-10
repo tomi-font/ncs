@@ -6,28 +6,6 @@
 
 menu "nRF Security"
 
-config NORDIC_SECURITY_PROMPTLESS
-	bool
-	help
-	  Internal setting to disable the Nordic security backend.
-	  This setting is Kconfig internal that must be used by subsystems that
-	  provide nRF Security selection groups.
-
-
-config NORDIC_SECURITY_BACKEND
-	bool "Use nRF Security with Mbed TLS legacy crypto APIs support" \
-		if !NORDIC_SECURITY_PROMPTLESS
-	depends on SOC_FAMILY_NORDIC_NRF
-	select NRF_SECURITY
-	select MBEDTLS_LEGACY_CRYPTO_C
-	select OBERON_BACKEND if BUILD_WITH_TFM
-	select DISABLE_MBEDTLS_BUILTIN if MBEDTLS
-	help
-	  Using this configuration enables legacy support for mbed TLS APIs
-	  This configuration is not to be used for PSA API support.
-	  Note that this will enable nrf_oberon by default. Multiple backends is
-	  not supported.
-
 config NRF_SECURITY
 	bool "nRF Security" if !PSA_PROMPTLESS
 	depends on SOC_FAMILY_NORDIC_NRF
@@ -265,7 +243,7 @@ choice MBEDTLS_IMPLEMENTATION
 
 config MBEDTLS_LIBRARY_NRF_SECURITY
 	bool "Use nRF Security mbedTLS version"
-	depends on NORDIC_SECURITY_BACKEND || NRF_SECURITY
+	depends on NRF_SECURITY
 	help
 	  Use Mbed TLS library from Nordic provided security backend
 
