@@ -71,10 +71,6 @@ static psa_status_t get_sx_secp_r1_curve(size_t curve_bits, const struct sx_pk_e
 	const struct sx_pk_ecurve *selected_curve = NOT_ENABLED_CURVE;
 
 	switch (curve_bits) {
-	case 224:
-		IF_ENABLED(PSA_NEED_CRACEN_KEY_TYPE_ECC_SECP_R1_224,
-			   (selected_curve = &sx_curve_nistp224));
-		break;
 	case 256:
 		IF_ENABLED(PSA_NEED_CRACEN_KEY_TYPE_ECC_SECP_R1_256,
 			   (selected_curve = &sx_curve_nistp256));

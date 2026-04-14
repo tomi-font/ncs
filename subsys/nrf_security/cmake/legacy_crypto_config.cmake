@@ -60,7 +60,6 @@ kconfig_check_and_set_base(MBEDTLS_ECDSA_VERIFY_ALT)
 kconfig_check_and_set_base(MBEDTLS_ECJPAKE_C)
 kconfig_check_and_set_base(MBEDTLS_ECJPAKE_ALT)
 kconfig_check_and_set_base(MBEDTLS_ECP_DP_SECP192R1_ENABLED)
-kconfig_check_and_set_base(MBEDTLS_ECP_DP_SECP224R1_ENABLED)
 kconfig_check_and_set_base(MBEDTLS_ECP_DP_SECP256R1_ENABLED)
 kconfig_check_and_set_base(MBEDTLS_ECP_DP_SECP384R1_ENABLED)
 kconfig_check_and_set_base(MBEDTLS_ECP_DP_SECP521R1_ENABLED)
@@ -220,10 +219,6 @@ kconfig_check_and_set_base_depends(MBEDTLS_ECP_C
 kconfig_check_and_set_base_depends(MBEDTLS_ECDSA_DETERMINISTIC
   PSA_WANT_ALG_DETERMINISTIC_ECDSA
   PSA_WANT_ALG_HMAC_DRBG
-)
-
-Kconfig_check_and_set_base_depends(MBEDTLS_ECP_DP_SECP224R1_ENABLED
-  PSA_WANT_ECC_SECP_R1_224
 )
 
 Kconfig_check_and_set_base_depends(MBEDTLS_ECP_DP_SECP256R1_ENABLED

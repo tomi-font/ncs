@@ -32,7 +32,6 @@ extern const struct sx_pk_ecurve sx_curve_brainpoolP384r1;
 extern const struct sx_pk_ecurve sx_curve_brainpoolP512r1;
 extern const struct sx_pk_ecurve sx_curve_ed25519;
 extern const struct sx_pk_ecurve sx_curve_ed448;
-extern const struct sx_pk_ecurve sx_curve_nistp224;
 extern const struct sx_pk_ecurve sx_curve_nistp256;
 extern const struct sx_pk_ecurve sx_curve_nistp384;
 extern const struct sx_pk_ecurve sx_curve_nistp521;

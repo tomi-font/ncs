@@ -74,7 +74,6 @@
 #cmakedefine PSA_WANT_ECC_MONTGOMERY_448                        @PSA_WANT_ECC_MONTGOMERY_448@
 #cmakedefine PSA_WANT_ECC_SECP_K1_224                           @PSA_WANT_ECC_SECP_K1_224@
 #cmakedefine PSA_WANT_ECC_SECP_K1_256                           @PSA_WANT_ECC_SECP_K1_256@
-#cmakedefine PSA_WANT_ECC_SECP_R1_224                           @PSA_WANT_ECC_SECP_R1_224@
 #cmakedefine PSA_WANT_ECC_SECP_R1_256                           @PSA_WANT_ECC_SECP_R1_256@
 #cmakedefine PSA_WANT_ECC_SECP_R1_384                           @PSA_WANT_ECC_SECP_R1_384@
 #cmakedefine PSA_WANT_ECC_SECP_R1_521                           @PSA_WANT_ECC_SECP_R1_521@
