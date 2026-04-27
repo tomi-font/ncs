@@ -260,6 +260,12 @@ config PSA_WANT_ALG_RSA_PSS_ANY_SALT
 	bool "PSA RSA PSS message signature support, any salt length" if !PSA_PROMPTLESS
 	default y if PSA_CRYPTO_ENABLE_ALL
 
+config PSA_WANT_ALG_MD5
+	select NOT_SECURE
+
+config PSA_WANT_ALG_SHA_1
+	select NOT_SECURE
+
 config PSA_WANT_ALG_SHA_256_192
 	bool "PSA SHA-256/192 support" if !PSA_PROMPTLESS
 	default y if PSA_CRYPTO_ENABLE_ALL
