@@ -8,6 +8,20 @@
 #ifndef PSA_CRYPTO_CONFIG_H
 #define PSA_CRYPTO_CONFIG_H
 
+#cmakedefine MBEDTLS_PSA_CRYPTO_C
+#cmakedefine MBEDTLS_PSA_CRYPTO_CLIENT
+
+#cmakedefine MBEDTLS_ASN1_PARSE_C
+#cmakedefine MBEDTLS_ASN1_WRITE_C
+#cmakedefine MBEDTLS_BASE64_C
+#cmakedefine MBEDTLS_MD_C
+#cmakedefine MBEDTLS_PEM_PARSE_C
+#cmakedefine MBEDTLS_PEM_WRITE_C
+#cmakedefine MBEDTLS_PK_C
+#cmakedefine MBEDTLS_PK_PARSE_C
+#cmakedefine MBEDTLS_PK_WRITE_C
+#cmakedefine MBEDTLS_PKCS5_C
+
 #cmakedefine PSA_WANT_AES_KEY_SIZE_128                          @PSA_WANT_AES_KEY_SIZE_128@
 #cmakedefine PSA_WANT_AES_KEY_SIZE_192                          @PSA_WANT_AES_KEY_SIZE_192@
 #cmakedefine PSA_WANT_AES_KEY_SIZE_256                          @PSA_WANT_AES_KEY_SIZE_256@

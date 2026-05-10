@@ -3,7 +3,20 @@
 #
 # SPDX-License-Identifier: LicenseRef-Nordic-5-Clause
 #
-# Convert all PSA_WANT_XXXX Kconfig variables for Mbed TLS (strip CONFIG_)
+
+kconfig_check_and_set_base_to_one(MBEDTLS_PSA_CRYPTO_C)
+kconfig_check_and_set_base_to_one(MBEDTLS_PSA_CRYPTO_CLIENT)
+
+kconfig_check_and_set_base_to_one(MBEDTLS_ASN1_PARSE_C)
+kconfig_check_and_set_base_to_one(MBEDTLS_ASN1_WRITE_C)
+kconfig_check_and_set_base_to_one(MBEDTLS_BASE64_C)
+kconfig_check_and_set_base_to_one(MBEDTLS_MD_C)
+kconfig_check_and_set_base_to_one(MBEDTLS_PEM_PARSE_C)
+kconfig_check_and_set_base_to_one(MBEDTLS_PEM_WRITE_C)
+kconfig_check_and_set_base_to_one(MBEDTLS_PK_C)
+kconfig_check_and_set_base_to_one(MBEDTLS_PK_PARSE_C)
+kconfig_check_and_set_base_to_one(MBEDTLS_PK_WRITE_C)
+kconfig_check_and_set_base_to_one(MBEDTLS_PKCS5_C)
 
 kconfig_check_and_set_base_to_one(PSA_WANT_AES_KEY_SIZE_128)
 kconfig_check_and_set_base_to_one(PSA_WANT_AES_KEY_SIZE_192)
