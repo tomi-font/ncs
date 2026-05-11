@@ -65,6 +65,7 @@ if(DEFINED CONFIG_HOSTAP_CRYPTO_ALT_PSA)
 
   zephyr_include_directories(
     ${HOSTAP_BASE}/port/mbedtls
+    ${CMAKE_SOURCE_DIR}/../../../../modules/crypto/oberon-psa-crypto/legacy_sub/include/
   )
 
   zephyr_library_sources(
