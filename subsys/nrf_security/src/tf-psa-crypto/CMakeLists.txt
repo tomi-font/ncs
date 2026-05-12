@@ -48,6 +48,13 @@ if(NOT CONFIG_MBEDTLS_PSA_CRYPTO_SPM)
       ${ZEPHYR_OBERON_PSA_CRYPTO_MODULE_DIR}/legacy_sub/include
       ${ZEPHYR_OBERON_PSA_CRYPTO_MODULE_DIR}/legacy_sub/src
   )
+
+  if(DEFINED ZEPHYR_OBERON_PSA_CRYPTO_MODULE_DIR)
+    target_include_directories(${mbedcrypto_target} PRIVATE
+      ${ZEPHYR_OBERON_PSA_CRYPTO_MODULE_DIR}/../tf-psa-crypto/include/library
+    )
+  endif()
+
 endif()
 
 target_sources(${mbedcrypto_target} PRIVATE ${src_crypto})
