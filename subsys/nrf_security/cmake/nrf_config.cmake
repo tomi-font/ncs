@@ -10,10 +10,6 @@
 kconfig_check_and_set_base(MBEDTLS_NO_PLATFORM_ENTROPY)
 kconfig_check_and_set_base(MBEDTLS_DEBUG_C)
 
-# Threading configurations for CryptoCell and locally built PSA core
-kconfig_check_and_set_base(MBEDTLS_THREADING_C)
-kconfig_check_and_set_base(MBEDTLS_THREADING_ALT)
-
 # Legacy configurations for _ALT defines
 kconfig_check_and_set_base(MBEDTLS_AES_SETKEY_ENC_ALT)
 kconfig_check_and_set_base(MBEDTLS_AES_SETKEY_DEC_ALT)

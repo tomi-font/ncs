@@ -7,6 +7,8 @@
 kconfig_check_and_set_base_to_one(MBEDTLS_PSA_CRYPTO_C)
 kconfig_check_and_set_base_to_one(MBEDTLS_PSA_CRYPTO_CLIENT)
 
+kconfig_check_and_set_base_to_one(MBEDTLS_THREADING_C)
+
 kconfig_check_and_set_base_to_one(MBEDTLS_ASN1_PARSE_C)
 kconfig_check_and_set_base_to_one(MBEDTLS_ASN1_WRITE_C)
 kconfig_check_and_set_base_to_one(MBEDTLS_BASE64_C)

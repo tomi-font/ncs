@@ -20,10 +20,6 @@
 #cmakedefine MBEDTLS_NO_PLATFORM_ENTROPY
 #cmakedefine MBEDTLS_DEBUG_C
 
-/* Threading configurations */
-#cmakedefine MBEDTLS_THREADING_C
-#cmakedefine MBEDTLS_THREADING_ALT
-
 /* Legacy configurations for _ALT defines */
 #cmakedefine MBEDTLS_AES_SETKEY_ENC_ALT
 #cmakedefine MBEDTLS_AES_SETKEY_DEC_ALT

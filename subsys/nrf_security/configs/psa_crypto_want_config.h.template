@@ -11,6 +11,8 @@
 #cmakedefine MBEDTLS_PSA_CRYPTO_C
 #cmakedefine MBEDTLS_PSA_CRYPTO_CLIENT
 
+#cmakedefine MBEDTLS_THREADING_C
+
 #cmakedefine MBEDTLS_ASN1_PARSE_C
 #cmakedefine MBEDTLS_ASN1_WRITE_C
 #cmakedefine MBEDTLS_BASE64_C

@@ -26,6 +26,7 @@ kconfig_check_and_set_base_to_one(MBEDTLS_PLATFORM_FPRINTF_ALT)
 kconfig_check_and_set_base_to_one(MBEDTLS_PLATFORM_PRINTF_ALT)
 kconfig_check_and_set_base_to_one(MBEDTLS_PLATFORM_SETUP_TEARDOWN_ALT)
 kconfig_check_and_set_base_to_one(MBEDTLS_PLATFORM_SNPRINTF_ALT)
+kconfig_check_and_set_base_to_one(MBEDTLS_THREADING_ALT)
 
 # TF-M
 kconfig_check_and_set_base_to_one(MBEDTLS_PSA_CRYPTO_SPM)
