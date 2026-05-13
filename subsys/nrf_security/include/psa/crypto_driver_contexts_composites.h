@@ -29,6 +29,21 @@
 
 #include "psa/crypto_driver_common.h"
 
+#if defined(__has_include) && \
+	__has_include("mbedtls/private/crypto_builtin_composites.h")
+#include "mbedtls/private/crypto_builtin_composites.h"
+#else
+
+typedef struct {
+	unsigned int reserved;
+} mbedtls_psa_sign_hash_interruptible_operation_t;
+
+typedef struct {
+	unsigned int reserved;
+} mbedtls_psa_verify_hash_interruptible_operation_t;
+
+#endif
+
 /* Include the context structure definitions for those drivers that were
  * declared during the autogeneration process.
  */
