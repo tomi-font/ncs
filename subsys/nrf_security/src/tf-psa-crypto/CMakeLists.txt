@@ -12,6 +12,13 @@ endif()
 
 if(NOT CONFIG_MBEDTLS_PSA_CRYPTO_SPM)
 
+  if(NOT CONFIG_MBEDTLS_PSA_CRYPTO_C)
+    append_with_prefix(src_crypto ${ZEPHYR_OBERON_PSA_CRYPTO_MODULE_DIR}/platform
+      platform.c
+      platform_util.c
+    )
+  endif()
+
   append_with_prefix(src_crypto ${ZEPHYR_OBERON_PSA_CRYPTO_MODULE_DIR}/utilities
     asn1parse.c
     asn1write.c
@@ -58,3 +65,12 @@ if(NOT CONFIG_MBEDTLS_PSA_CRYPTO_SPM)
 endif()
 
 target_sources(${mbedcrypto_target} PRIVATE ${src_crypto})
+
+if(CONFIG_MBEDTLS_ENABLE_HEAP AND NOT BUILD_INSIDE_TFM)
+  target_compile_definitions(${mbedcrypto_target}
+    PRIVATE
+      MBEDTLS_MEMORY_BUFFER_ALLOC_C
+      MBEDTLS_PLATFORM_C
+      MBEDTLS_PLATFORM_MEMORY
+  )
+endif()
