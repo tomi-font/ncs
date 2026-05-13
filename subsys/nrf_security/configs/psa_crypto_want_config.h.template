@@ -23,6 +23,7 @@
 #cmakedefine MBEDTLS_PK_PARSE_C
 #cmakedefine MBEDTLS_PK_WRITE_C
 #cmakedefine MBEDTLS_PKCS5_C
+#cmakedefine MBEDTLS_DECLARE_PRIVATE_IDENTIFIERS
 
 #cmakedefine PSA_WANT_AES_KEY_SIZE_128                          @PSA_WANT_AES_KEY_SIZE_128@
 #cmakedefine PSA_WANT_AES_KEY_SIZE_192                          @PSA_WANT_AES_KEY_SIZE_192@
