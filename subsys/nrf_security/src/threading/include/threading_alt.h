@@ -9,7 +9,16 @@
 
 #include <zephyr/kernel.h>
 
+#if !defined(CONFIG_HW_CC3XX)
+
 typedef struct k_mutex *mbedtls_platform_mutex_t;
+
+#else
+
+#include <nrf_cc3xx_platform_mutex.h>
+typedef nrf_cc3xx_platform_mutex_t mbedtls_platform_mutex_t;
+
+#endif
 
 /* Unused, but needs to be defined. */
 typedef int mbedtls_platform_condition_variable_t;
