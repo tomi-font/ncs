@@ -61,6 +61,15 @@ if(NOT CONFIG_MBEDTLS_PSA_CRYPTO_SPM)
     )
   endif()
 
+  if(CONFIG_MBEDTLS_DECLARE_PRIVATE_IDENTIFIERS)
+    append_with_prefix(src_crypto ${ZEPHYR_OBERON_PSA_CRYPTO_MODULE_DIR}/legacy_sub/src
+      aes.c
+      rsa.c
+      rsa_alt_helpers.c
+      sha256.c
+    )
+  endif()
+
   target_include_directories(${mbedcrypto_target}
     PUBLIC # public because needed by Mbed TLS which links to mbedcrypto via tfpsacrypto ALIAS below
       ${ZEPHYR_OBERON_PSA_CRYPTO_MODULE_DIR}/utilities
@@ -77,5 +86,7 @@ if(CONFIG_MBEDTLS)
   # Making it as an alias to mbedcrypto works well.
   add_library(tfpsacrypto ALIAS ${mbedcrypto_target})
 endif()
+
+
 
 target_sources(${mbedcrypto_target} PRIVATE ${src_crypto})
