@@ -79,6 +79,10 @@ endif()
 
 nrf_security_add_zephyr_options(${mbedcrypto_target})
 
+if(TARGET hostap_legacy_mbedtls)
+  nrf_security_add_zephyr_options(hostap_legacy_mbedtls)
+endif()
+
 # Add threading support for PSA core (if enabled)
 include(${CMAKE_CURRENT_LIST_DIR}/threading/threading.cmake)
 include(${NRF_SECURITY_DIR}/src/utils/nrf_security_utils.cmake)

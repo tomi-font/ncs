@@ -93,6 +93,6 @@ if(CONFIG_MBEDTLS)
   add_library(tfpsacrypto ALIAS ${mbedcrypto_target})
 endif()
 
-
+include(${CMAKE_CURRENT_LIST_DIR}/../../cmake/hostap_legacy_mbedtls.cmake)
 
 target_sources(${mbedcrypto_target} PRIVATE ${src_crypto})
