@@ -98,3 +98,19 @@
   platforms:
     - nrf7120dk/nrf7120/cpuapp
   comment: "https://nordicsemi.atlassian.net/browse/NCSDK-39364"
+
+- scenarios:
+    - sample.cellular.nidd
+    - sample.cellular.uicc_lwm2m
+    - sample.cellular.modem_shell_modem_uart_trace
+    - sample.cellular.modem_shell.thingy91
+    - sample.cellular.lwm2m_client
+    - sample.cellular.nrf_cloud_multi_service.mqtt.provisioning.trace
+    - sample.sensor.bh1749
+    - sample.sensor.bme68x.polling
+    - sample.cellular.location
+    - sample.cellular.nrf_cloud_multi_service.mqtt
+    - sample.net.mqtt.nrf91.tls
+  platforms:
+    - thingy91/nrf9160/ns
+  comment: "MCUboot RSA overflow, to be handled by Eris team"
