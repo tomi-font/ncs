@@ -30,10 +30,11 @@ if(DEFINED CONFIG_HOSTAP_CRYPTO_ALT_LEGACY_PSA)
   zephyr_include_directories(
     ${MBEDTLS_REMOVED_MODULES_PATH}
     ${HOSTAP_BASE}/port/mbedtls
+    ${ZEPHYR_MBEDTLS_MODULE_DIR}/include
   )
 
   zephyr_library_sources(
-    ${MBEDTLS_REMOVED_MODULES_PATH}/des.c
+    ${HOSTAP_BASE}/port/mbedtls/supp_psa_api.c
     ${HOSTAP_SRC_BASE}/crypto/crypto_mbedtls_alt.c
     ${HOSTAP_SRC_BASE}/crypto/rc4.c
     ${HOSTAP_SRC_BASE}/crypto/aes-wrap.c
@@ -41,10 +42,6 @@ if(DEFINED CONFIG_HOSTAP_CRYPTO_ALT_LEGACY_PSA)
     ${HOSTAP_SRC_BASE}/crypto/aes-internal-dec.c
     ${HOSTAP_SRC_BASE}/crypto/aes-internal.c
     ${HOSTAP_SRC_BASE}/crypto/aes-internal-enc.c
-  )
-
-  zephyr_library_sources_ifdef(CONFIG_HOSTAP_CRYPTO_ALT_PSA
-    ${HOSTAP_BASE}/port/mbedtls/supp_psa_api.c
   )
 
   zephyr_library_sources_ifdef(CONFIG_HOSTAP_CRYPTO_ENTERPRISE
@@ -60,6 +57,12 @@ if(DEFINED CONFIG_HOSTAP_CRYPTO_ALT_LEGACY_PSA)
   zephyr_library_sources_ifndef(CONFIG_HOSTAP_CRYPTO_ENTERPRISE
     ${HOSTAP_SRC_BASE}/crypto/tls_none.c
   )
+
+  zephyr_library_sources_ifndef(CONFIG_PSA_WANT_ALG_HKDF
+    ${HOSTAP_SRC_BASE}/crypto/sha256-kdf.c
+    ${HOSTAP_SRC_BASE}/crypto/sha384-kdf.c
+    ${HOSTAP_SRC_BASE}/crypto/sha512-kdf.c
+  )
 endif()
 
 if(DEFINED CONFIG_HOSTAP_CRYPTO_ALT_PSA)
@@ -71,10 +74,10 @@ if(DEFINED CONFIG_HOSTAP_CRYPTO_ALT_PSA)
   zephyr_include_directories(
     ${MBEDTLS_REMOVED_MODULES_PATH}
     ${HOSTAP_BASE}/port/mbedtls
+    ${ZEPHYR_MBEDTLS_MODULE_DIR}/include
   )
 
   zephyr_library_sources(
-    ${MBEDTLS_REMOVED_MODULES_PATH}/des.c
     ${HOSTAP_SRC_BASE}/crypto/aes-wrap.c
     ${HOSTAP_SRC_BASE}/crypto/aes-unwrap.c
     ${HOSTAP_SRC_BASE}/crypto/aes-internal-dec.c
@@ -88,6 +91,8 @@ if(DEFINED CONFIG_HOSTAP_CRYPTO_ALT_PSA)
 
   zephyr_library_sources_ifndef(CONFIG_PSA_WANT_ALG_HKDF
     ${HOSTAP_SRC_BASE}/crypto/sha256-kdf.c
+    ${HOSTAP_SRC_BASE}/crypto/sha384-kdf.c
+    ${HOSTAP_SRC_BASE}/crypto/sha512-kdf.c
   )
 
   if(CONFIG_HOSTAP_CRYPTO_WPA3_PSA)
@@ -99,12 +104,4 @@ if(DEFINED CONFIG_HOSTAP_CRYPTO_ALT_PSA)
       CONFIG_ECC
     )
   endif()
-endif()
-
-if(DEFINED CONFIG_HOSTAP_CRYPTO_ALT_LEGACY_PSA OR DEFINED CONFIG_HOSTAP_CRYPTO_ALT_PSA)
-  set_source_files_properties(
-    ${MBEDTLS_REMOVED_MODULES_PATH}/des.c
-    PROPERTIES COMPILE_DEFINITIONS
-    "TF_PSA_CRYPTO_CONFIG_CHECK_BYPASS;MBEDTLS_DES_C"
-  )
 endif()

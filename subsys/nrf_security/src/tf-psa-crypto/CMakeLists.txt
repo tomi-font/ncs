@@ -70,6 +70,12 @@ if(NOT CONFIG_MBEDTLS_PSA_CRYPTO_SPM)
     )
   endif()
 
+  if(CONFIG_PSA_WANT_ALG_SHA_512)
+    append_with_prefix(src_crypto ${ZEPHYR_OBERON_PSA_CRYPTO_MODULE_DIR}/legacy_sub/src
+      sha512.c
+    )
+  endif()
+
   target_include_directories(${mbedcrypto_target}
     PUBLIC # public because needed by Mbed TLS which links to mbedcrypto via tfpsacrypto ALIAS below
       ${ZEPHYR_OBERON_PSA_CRYPTO_MODULE_DIR}/utilities
@@ -87,6 +93,6 @@ if(CONFIG_MBEDTLS)
   add_library(tfpsacrypto ALIAS ${mbedcrypto_target})
 endif()
 
-
+include(${CMAKE_CURRENT_LIST_DIR}/../../cmake/hostap_legacy_mbedtls.cmake)
 
 target_sources(${mbedcrypto_target} PRIVATE ${src_crypto})
