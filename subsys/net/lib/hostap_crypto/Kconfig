@@ -22,6 +22,7 @@ choice HOSTAP_CRYPTO_BACKEND
 config HOSTAP_CRYPTO_ALT_LEGACY_PSA
 	bool "Legacy Crypto support for WiFi using nRF security"
 	select PSA_CRYPTO
+	select PSA_WANT_ALG_SHA_512
 	select PSA_WANT_ALG_CMAC
 	select PSA_WANT_ALG_ECB_NO_PADDING
 	select PSA_WANT_ALG_SHA_1

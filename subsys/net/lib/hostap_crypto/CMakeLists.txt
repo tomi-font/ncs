@@ -15,10 +15,6 @@ set(HOSTAP_BASE ${ZEPHYR_HOSTAP_MODULE_DIR})
 set(WIFI_NM_WPA_SUPPLICANT_BASE ${HOSTAP_BASE}/wpa_supplicant)
 set(HOSTAP_SRC_BASE ${HOSTAP_BASE}/src)
 set(WIFI_NM_HOSTAPD_BASE ${HOSTAP_BASE}/hostapd)
-# Same layout as Zephyr MBEDTLS_REMOVED_MODULES_PATH (modules/mbedtls/legacy_support.cmake);
-# TF-PSA / Oberon drop DES from the core tree; hostap still needs mbedtls/des.h and des.c for
-# crypto_mbedtls_alt.c (e.g. des_encrypt) even without Enterprise.
-set(MBEDTLS_REMOVED_MODULES_PATH "${HOSTAP_BASE}/port/mbedtls/removed")
 
 set(CMAKE_EXE_LINKER_FLAGS "--specs=nosys.specs -lnosys")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DMISSING_SYSCALL_NAMES")
@@ -26,14 +22,24 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DMISSING_SYSCALL_NAMES")
 # For src/utils includes
 target_link_libraries(hostap_crypto INTERFACE hostap)
 
-if(DEFINED CONFIG_HOSTAP_CRYPTO_ALT_LEGACY_PSA)
+# Upstream HostAP DES/DHM (builtin) + mbedtls headers (mbedtls_iface); see
+# zephyr/modules/mbedtls/legacy_support.cmake.
+include(${CMAKE_CURRENT_LIST_DIR}/cmake/hostap_mbedtls_legacy.cmake)
+
+target_link_libraries(hostap_crypto INTERFACE mbedtls_iface)
+zephyr_library_link_libraries(mbedtls_iface)
+
+if(TARGET builtin)
+  zephyr_library_link_libraries(builtin)
+endif()
+
+if(CONFIG_HOSTAP_CRYPTO_ALT_LEGACY_PSA)
   zephyr_include_directories(
-    ${MBEDTLS_REMOVED_MODULES_PATH}
     ${HOSTAP_BASE}/port/mbedtls
   )
 
   zephyr_library_sources(
-    ${MBEDTLS_REMOVED_MODULES_PATH}/des.c
+    ${HOSTAP_BASE}/port/mbedtls/supp_psa_api.c
     ${HOSTAP_SRC_BASE}/crypto/crypto_mbedtls_alt.c
     ${HOSTAP_SRC_BASE}/crypto/rc4.c
     ${HOSTAP_SRC_BASE}/crypto/aes-wrap.c
@@ -41,10 +47,6 @@ if(DEFINED CONFIG_HOSTAP_CRYPTO_ALT_LEGACY_PSA)
     ${HOSTAP_SRC_BASE}/crypto/aes-internal-dec.c
     ${HOSTAP_SRC_BASE}/crypto/aes-internal.c
     ${HOSTAP_SRC_BASE}/crypto/aes-internal-enc.c
-  )
-
-  zephyr_library_sources_ifdef(CONFIG_HOSTAP_CRYPTO_ALT_PSA
-    ${HOSTAP_BASE}/port/mbedtls/supp_psa_api.c
   )
 
   zephyr_library_sources_ifdef(CONFIG_HOSTAP_CRYPTO_ENTERPRISE
@@ -68,19 +70,17 @@ if(DEFINED CONFIG_HOSTAP_CRYPTO_ALT_LEGACY_PSA)
   )
 endif()
 
-if(DEFINED CONFIG_HOSTAP_CRYPTO_ALT_PSA)
+if(CONFIG_HOSTAP_CRYPTO_ALT_PSA)
   # Source code still uses the original symbol
   zephyr_compile_definitions(
     CONFIG_WIFI_NM_WPA_SUPPLICANT_CRYPTO_MBEDTLS_PSA
   )
 
   zephyr_include_directories(
-    ${MBEDTLS_REMOVED_MODULES_PATH}
     ${HOSTAP_BASE}/port/mbedtls
   )
 
   zephyr_library_sources(
-    ${MBEDTLS_REMOVED_MODULES_PATH}/des.c
     ${HOSTAP_SRC_BASE}/crypto/aes-wrap.c
     ${HOSTAP_SRC_BASE}/crypto/aes-unwrap.c
     ${HOSTAP_SRC_BASE}/crypto/aes-internal-dec.c
@@ -107,12 +107,4 @@ if(DEFINED CONFIG_HOSTAP_CRYPTO_ALT_PSA)
       CONFIG_ECC
     )
   endif()
-endif()
-
-if(DEFINED CONFIG_HOSTAP_CRYPTO_ALT_LEGACY_PSA OR DEFINED CONFIG_HOSTAP_CRYPTO_ALT_PSA)
-  set_source_files_properties(
-    ${MBEDTLS_REMOVED_MODULES_PATH}/des.c
-    PROPERTIES COMPILE_DEFINITIONS
-    "TF_PSA_CRYPTO_CONFIG_CHECK_BYPASS;MBEDTLS_DES_C"
-  )
 endif()
