@@ -62,9 +62,9 @@ if(NOT CONFIG_MBEDTLS_PSA_CRYPTO_SPM)
   endif()
 
   if(CONFIG_MBEDTLS_DECLARE_PRIVATE_IDENTIFIERS)
+    # Oberon TF-PSA has no legacy_sub md5.c; MD5 is provided via PSA (PSA_WANT_ALG_MD5).
     append_with_prefix(src_crypto ${ZEPHYR_OBERON_PSA_CRYPTO_MODULE_DIR}/legacy_sub/src
       aes.c
-      md5.c
       rsa.c
       rsa_alt_helpers.c
       sha1.c
