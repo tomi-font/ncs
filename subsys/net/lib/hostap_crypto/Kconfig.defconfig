@@ -4,6 +4,17 @@
 # SPDX-License-Identifier: LicenseRef-Nordic-5-Clause
 #
 
+# Oberon TF-PSA has no platform_alt.h; Kconfig.legacy defaults this on for
+# CC3XX but supp_main includes mbedtls/platform.h when the heap is disabled.
+if WIFI_NM_WPA_SUPPLICANT && SOC_FAMILY_NORDIC_NRF
+if HOSTAP_CRYPTO_ALT_PSA || HOSTAP_CRYPTO_ALT_LEGACY_PSA
+
+config MBEDTLS_PLATFORM_SETUP_TEARDOWN_ALT
+	default n
+
+endif
+endif
+
 # PSA backend defaults: WPA3 via external PSA implementation.
 if WIFI_NM_WPA_SUPPLICANT && SOC_FAMILY_NORDIC_NRF && HOSTAP_CRYPTO_ALT_PSA
 
